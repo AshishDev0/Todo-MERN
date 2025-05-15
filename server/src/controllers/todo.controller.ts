@@ -24,17 +24,20 @@ export const createTodo = async (
 
     // console.log("Created todo:", todo);
 
-    return res.status(201).json(todo);
+    res.status(201).json(todo);
+    return;
   } catch (error: any) {
     console.error("Error creating todo:", error);
     if (error.name === "ZodError") {
-      return res.status(400).json({
+      res.status(400).json({
         message: "Validation error",
         errors: error.errors,
       });
+      return;
     }
 
-    return res.status(400).json({ message: error.message });
+    res.status(400).json({ message: error.message });
+    return;
   }
 };
 
@@ -99,7 +102,8 @@ export const updateTodo = async (
     );
 
     if (!todo) {
-      return res.status(404).json({ message: "Todo not found" });
+      res.status(404).json({ message: "Todo not found" });
+      return;
     }
 
     // console.log("Updated todo:", todo);
@@ -107,10 +111,11 @@ export const updateTodo = async (
   } catch (error: any) {
     console.error("Error updating todo:", error);
     if (error.name === "ZodError") {
-      return res.status(400).json({
+      res.status(400).json({
         message: "Validation error",
         errors: error.errors,
       });
+      return;
     }
     res.status(400).json({ message: error.message });
   }
@@ -126,7 +131,8 @@ export const deleteTodo = async (
     const { id } = req.params;
     const todo = await Todo.findByIdAndDelete(id);
     if (!todo) {
-      return res.status(404).json({ message: "Todo not found" });
+      res.status(404).json({ message: "Todo not found" });
+      return;
     }
     res.json({ message: "Todo deleted successfully" });
   } catch (error: any) {
