@@ -13,9 +13,9 @@ export interface Todo {
 
 export interface CreateTodoInput {
   name: string;
-  description?: string;
+  description: string;
   dueDate?: string;
-  priority: Priority;
+  priority?: Priority;
 }
 
 export interface UpdateTodoInput {
