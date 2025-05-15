@@ -13,9 +13,13 @@ const initialState: TodoState = {
 };
 
 export const fetchTodos = createAsyncThunk("todos/fetchAll", async () => {
-  const response = await todoApi.getAll();
-  // console.log("Todos fetched in thunk:", response);
-  return response;
+  try {
+    const response = await todoApi.getAll();
+    return Array.isArray(response) ? response : [];
+  } catch (error) {
+    console.error("Error fetching todos:", error);
+    throw error;
+  }
 });
 
 export const createTodo = createAsyncThunk(
@@ -47,18 +51,18 @@ const todoSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchTodos.pending, (state) => {
-        // console.log("Fetch todos pending...");
         state.loading = true;
+        state.error = null;
       })
       .addCase(fetchTodos.fulfilled, (state, action) => {
-        // console.log("Fetch todos fulfilled:", action.payload);
         state.loading = false;
-        state.todos = action.payload;
+        state.todos = Array.isArray(action.payload) ? action.payload : [];
+        state.error = null;
       })
       .addCase(fetchTodos.rejected, (state, action) => {
-        // console.log("Fetch todos rejected:", action.error);
         state.loading = false;
         state.error = action.error.message || "Failed to fetch todos";
+        state.todos = [];
       })
       .addCase(createTodo.fulfilled, (state, action) => {
         state.todos.push(action.payload);
