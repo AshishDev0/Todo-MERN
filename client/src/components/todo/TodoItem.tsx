@@ -30,7 +30,7 @@ const priorityColors = {
 
 export function TodoItem({ todo }: TodoItemProps) {
   const dispatch = useAppDispatch();
-  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [_, setIsEditDialogOpen] = useState(false);
 
   const handleToggle = () => {
     const newStatus = !todo.completed;
