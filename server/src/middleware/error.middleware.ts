@@ -1,29 +1,31 @@
-import { NextFunction, Request, Response } from "express";
+import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
 import { AppError } from "../types/error.types";
 import { ZodError } from "zod";
 
-export const errorHandler = (
+export const errorHandler: ErrorRequestHandler = (
   err: Error,
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   if (err instanceof AppError) {
-    return res.status(err.statusCode).json({
+    res.status(err.statusCode).json({
       status: "error",
       message: err.message,
     });
+    return;
   }
 
   if (err instanceof ZodError) {
-    return res.status(400).json({
+    res.status(400).json({
       status: "error",
       message: err.errors[0].message,
     });
+    return;
   }
 
   console.error("Error", err);
-  return res.status(500).json({
+  res.status(500).json({
     status: "error",
     message: "Interval Servor Error",
   });
