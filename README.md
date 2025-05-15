@@ -1,17 +1,17 @@
 # Todo App
 
-A modern Todo application built with React, Node.js, MongoDB, and TypeScript. Features include task management, priority levels, due dates, and a beautiful UI inspired by Todoist.
+A modern Todo application built with React, Node.js, MongoDB, and TypeScript. Features include task management, priority levels, due dates, and a beautiful responsive UI.
 
 ## Features
 
 - Modern and responsive UI
 - Mobile-friendly design
-- ✅ Task completion tracking
-- ⭐ Priority levels (Low, Medium, High)
-- 📅 Due date management
-- 🔄 Real-time updates
-- 🎨 Beautiful animations and transitions
-- 🌙 Dark mode support
+- Task completion tracking
+- Priority levels (Low, Medium, High)
+- Due date management
+- Real-time updates
+- Beautiful animations and transitions
+- Dark mode support
 
 ## Tech Stack
 
@@ -68,7 +68,7 @@ todo-app/
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/AshishDev0/Todo-MERN.git
 cd todo-app
 ```
 
